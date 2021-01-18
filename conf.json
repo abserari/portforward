@@ -1,0 +1,13 @@
+{
+  "addr":[
+    {
+      "saddr":"39.105.141.168:22", 
+      "user": "root",
+      "type": 2,
+      "passwd": "D:\\34903\\Documents\\abserari.pem",
+      "connect": "R",
+      "remote": "127.0.0.1:1080",
+      "listen": "127.0.0.1:7890"
+    }
+  ]
+}
