@@ -55,6 +55,7 @@ type Connect struct {
 	Remote      string            `json:"remote"`  // 远程地址
 	Listen      string            `json:"listen"`  // 本地监听地址
 	Connect     string            `json:"connect"` // 连接类型 L 本地转发 R 远程转发 D 动态转发
+	Disable     bool              `json:"disable"` // 是否建立链接
 	Son         []Connect         `json:"son"`     // 子连接
 	client      *ssh.Client       // ssh 客户端
 	sshConfig   *ssh.ClientConfig // 连接ssh 的配置
@@ -65,6 +66,10 @@ func StartAction(addrs []Connect) {
 		go func(item Connect) {
 			item.sshConfig = new(ssh.ClientConfig)
 			item.config()
+			if item.Disable {
+				log.Println("不建立目标链接", item.Saddr)
+				return
+			}
 			log.Println("连接目标机器", item.Saddr)
 			item.client = new(ssh.Client)
 			defer func() {
